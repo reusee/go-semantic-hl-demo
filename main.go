@@ -51,14 +51,16 @@ func main() {
 	}
 
 	// print all identifiers and their references
-	for ident, obj := range pkg.TypesInfo.Defs {
-		pt("%s at %v\n", ident.Name, fset.Position(ident.NamePos))
-		for ref, refObj := range pkg.TypesInfo.Uses {
+	t0 = time.Now()
+	for _, obj := range pkg.TypesInfo.Defs {
+		//pt("%s at %v\n", ident.Name, fset.Position(ident.NamePos))
+		for _, refObj := range pkg.TypesInfo.Uses {
 			if refObj != obj {
 				continue
 			}
-			pt("\t%s at %v\n", ref.Name, fset.Position(ref.NamePos))
+			//pt("\t%s at %v\n", ref.Name, fset.Position(ref.NamePos))
 		}
 	}
+	pt("%v\n", time.Since(t0))
 
 }
